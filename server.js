@@ -39,7 +39,7 @@ router.route('/coins')
 	})
 
 	.get(function(req, res) {
-		Coin.find(function(err, coins) {
+		Coins.find(function(err, coins) {
 			if (err) {
 				res.send(err);
 			};
