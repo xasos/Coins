@@ -48,6 +48,18 @@ router.route('/coins')
 		});
 	});
 
+router.route('/coins/:coin_id') 
+	.get(function(req, res) {
+		Coin.findById(req.params.coin_id, function(err, coin) {
+			if (err) {
+				res.send(err);
+			};
+
+			res.json(coin);
+		});
+	});
+}
+
 app.use('/', router);
 
 app.listen(port);
