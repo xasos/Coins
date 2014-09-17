@@ -1,11 +1,15 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;
+mongoose.connect('') //add mongoDB URI
+
+
+var port = process.env.PORT || 1337;
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -15,4 +19,4 @@ router.get('/', function(req, res) {
 app.use('/', router);
 
 app.listen(port);
-console.log('Listening on port: ' + port);
+console.log('Listening on port ' + port);
