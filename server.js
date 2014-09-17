@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-mongoose.connect('') //add mongoDB URI
+mongoose.connect('mongodb://heroku_app29621731:ecvpc0u4v5njka5rejrlcbvghe@ds035750.mongolab.com:35750/heroku_app29621731');
 
 
 var port = process.env.PORT || 1337;
