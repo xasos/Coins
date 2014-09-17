@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var cheerio = require('cheerio');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -48,17 +49,17 @@ router.route('/coins')
 		});
 	});
 
-router.route('/coins/:coin_id') 
-	.get(function(req, res) {
-		Coin.findById(req.params.coin_id, function(err, coin) {
-			if (err) {
-				res.send(err);
-			};
+// router.route('/coins/:coin_id') 
+// 	.get(function(req, res) {
+// 		Coin.findById(req.params.coin_id, function(err, coin) {
+// 			if (err) {
+// 				res.send(err);
+// 			};
 
-			res.json(coin);
-		});
-	});
-}
+// 			res.json(coin);
+// 		});
+// 	});
+// }
 
 app.use('/', router);
 
