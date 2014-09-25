@@ -5,8 +5,15 @@ Cryptocurrency Price API written in Node.js/Express. Data is currently scraped f
 **Base URL:** http://coinmarketcap.com/
 ### Get Coin Prices
 ```
-/coins
-GET
+GET /coins/:id
+```
+
+Example Query:
+```
+```
+
+Example Response:
+```
 ```
 
 ## License
