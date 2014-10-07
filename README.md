@@ -35,7 +35,7 @@ Response:
 ```
 
 ## Credits
-All the data was scraped from coinmarketcap.com. Additionally, these API documents were modeled off @karan\'s wonderful API documentation for [Hook](https://github.com/karan/Hook).
+All the data was scraped from coinmarketcap.com. Additionally, these API documents were modeled off the wonderful API documentation for [Hook](https://github.com/karan/Hook) by @karan.
 
 ## License
 [MIT License](LICENSE)
