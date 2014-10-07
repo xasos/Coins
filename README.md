@@ -3,7 +3,7 @@
 Cryptocurrency Price API written in Node.js/Express. Data is currently scraped from [CoinMarketCap](http://coinmarketcap.com/).
 ## Usage
 **Base URL:** http://coins-api.herokuapp.com
-9
+
 ### Get Coin Prices
 ```
 GET /coins/:id
