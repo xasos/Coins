@@ -1,12 +1,15 @@
 var express = require('express');
 var app = express();
+
 var bodyParser = require('body-parser');
 var cheerio = require('cheerio');
 var request = require('request');
+var urls = [];
+var coinList = {name: '', price: '', ticker: '', delta24hr: ''}
+var target = 'http://targetmoon.com/';
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 
 var Coins = require('./app/models/coins');
 var mongoose = require('mongoose');
@@ -16,7 +19,7 @@ var port = process.env.PORT || 1337;
 var router = express.Router();
 
 router.use(function(req, res, next) {
-	console.log('omgomgomg.');
+	console.log('Request');
 	next();
 });
 
@@ -25,21 +28,6 @@ router.get('/', function(req, res) {
 });
 
 router.route('/coins') 
-	.post(function(req, res) {
-		
-		var coin = new Coins(); 		
-		coin.name = req.body.name;  
-
-		// save the bear and check for errors
-		coin.save(function(err) {
-			if (err)
-				res.send(err);
-
-			res.json({ message: 'Coin created!' });
-		});
-		
-	})
-
 	.get(function(req, res) {
 		Coins.find(function(err, coins) {
 			if (err) {
@@ -49,6 +37,25 @@ router.route('/coins')
 			res.json(coins);
 		});
 	});
+
+router.route('/test') 
+	.get(function(req, res) {
+		scrapeCoins(10);
+		res.json({"text": "yo"});
+	})
+
+var scrapeCoins = function(numCoins) {
+	request(target, function(err, resp, body) {
+		if (!err && resp.statusCode == 200) {
+			var $ = cheerio.load(body);
+			$('a.coin-name', '#2').each(function() {
+				var url = $(this).text();
+				urls.push(url);
+				console.log(urls);
+			});
+		}
+	});
+};
 
 // router.route('/coins/:coin_id') 
 // 	.get(function(req, res) {

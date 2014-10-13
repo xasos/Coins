@@ -35,6 +35,17 @@ Response:
 
 ```
 
+## Run Locally
+$ npm install
+$ node server.js
+
+## Deploy to Heroku 
+$ npm install
+$ heroku create
+$ heroku addons:add mongolab
+$ (git add, git commit)
+$ git push heroku master
+
 ## Credits
 All the data was scraped from coinmarketcap.com. Additionally, these API documents were modeled off of the wonderful API documentation for [Hook](https://github.com/karan/Hook) by @karan.
 
