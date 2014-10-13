@@ -49,9 +49,15 @@ var scrapeCoins = function(numCoins) {
 		if (!err && resp.statusCode == 200) {
 			var $ = cheerio.load(body);
 			$('a.coin-name', '#2').each(function() {
-				var url = $(this).text();
-				urls.push(url);
+				var name = $(this).text();
+				urls.push(name);
 				console.log(urls);
+			});
+
+			$('img.coin-logo', '#2').each(function() {
+				var imageURL = $(this).attr('src');
+				imageURL = target + imageURL;
+				console.log(imageURL);
 			});
 		}
 	});
