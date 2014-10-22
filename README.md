@@ -12,12 +12,12 @@ GET /coins/:id
 
 Example Query:
 ```
-http://hook-api.herokuapp.com/coins/1299101
+/coins/1299101
 ```
 
 Response:
 ```
-
+{"coin": "Bitcoin"
 ```
 
 ### Get Price in Other Currencies
@@ -27,12 +27,19 @@ GET /coins/:id/chf
 
 Example Query:
 ```
-http://hook-api.herokuapp.com/coins/1299101/chf
+/coins/1299101/chf
 ```
 
 Response:
 ```
-
+{
+  "coin": "Bitcoin",
+  "ticker": "BTC",
+  "price": "383.95",
+  "24hrvolume": "12268800",
+  "24hrchange": "-0.95",
+  "supply": "13412775"
+}
 ```
 
 ## Run Locally
