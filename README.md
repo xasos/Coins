@@ -6,13 +6,12 @@ Cryptocurrency Price API written in Node.js/Express. Data is currently scraped f
 **Base URL:** http://coins-api.herokuapp.com
 
 ### Get Coin Prices
-```
-GET /coins/:id
-```
+
+#### `GET /coins/id`
 
 Example Query:
 ```
-/coins/1299101
+http://coins-api.herokuapp.com/coins/1299101
 ```
 
 Response:
@@ -21,13 +20,12 @@ Response:
 ```
 
 ### Get Price in Other Currencies
-```
-GET /coins/:id/chf
-```
+
+#### `GET /coins/:id/chf`
 
 Example Query:
 ```
-/coins/1299101/chf
+http://coins-api.herokuapp.com/coins/1299101/chf
 ```
 
 Response:
