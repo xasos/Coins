@@ -5,7 +5,11 @@ Cryptocurrency Price API written in Node.js/Express. Data is currently scraped f
 ## Usage
 **Base URL:** http://coins-api.herokuapp.com
 
+**Output:** JSON
+
 ### Get Coin Prices
+
+Get information about top coins
 
 #### `GET /coins/id`
 
@@ -15,8 +19,15 @@ http://coins-api.herokuapp.com/coins/1299101
 ```
 
 Response:
-```
-{"coin": "Bitcoin"
+```json
+{
+  "coin": "Bitcoin",
+  "ticker": "BTC",
+  "price": "383.95",
+  "24hrvolume": "12268800",
+  "24hrchange": "-0.95",
+  "supply": "13412775"
+}
 ```
 
 ### Get Price in Other Currencies
@@ -29,7 +40,7 @@ http://coins-api.herokuapp.com/coins/1299101/chf
 ```
 
 Response:
-```
+```json
 {
   "coin": "Bitcoin",
   "ticker": "BTC",
