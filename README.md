@@ -49,7 +49,7 @@ Response:
 
 ### Get Price in Other Currencies
 
-#### `GET /coins/:ticker/:currency`
+#### `GET /coins/:ticker/price/:currency`
 
 Example Query:
 ```
