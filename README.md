@@ -33,6 +33,8 @@ Response:
 
 Simply append any property to the URL after the ticker
 
+#### `GET /coins/:ticker/:property`
+
 Example Query:
 ```
 http://coins-api.herokuapp.com/coins/btc/supply
