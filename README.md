@@ -9,7 +9,7 @@ Cryptocurrency Price API written in Node.js/Express. Data is currently scraped f
 
 ### Get Coin Prices
 
-Get information about top coins
+Get information about coins
 
 #### `GET /coins/:ticker`
 
@@ -26,6 +26,21 @@ Response:
   "price": "383.95",
   "24hrvolume": "12268800",
   "24hrchange": "-0.95",
+  "supply": "13412775"
+}
+```
+### Isolated Properties
+
+Simply append any property to the URL after the ticker
+
+Example Query:
+```
+http://coins-api.herokuapp.com/coins/btc/supply
+```
+
+Response:
+```json
+{
   "supply": "13412775"
 }
 ```
