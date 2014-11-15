@@ -1,6 +1,6 @@
 # Coins
 
-Cryptocurrency Price API written in Node.js/Express. Data is currently scraped from [TargetMoon](http://targetmoon.com/).
+Cryptocurrency Price API written in Node.js/Express. Data is currently scraped from [CoinMarketCap](http://coinmarketcap.com/).
 
 ## Usage
 **Base URL:** http://coins-api.herokuapp.com
