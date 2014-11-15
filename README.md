@@ -11,11 +11,11 @@ Cryptocurrency Price API written in Node.js/Express. Data is currently scraped f
 
 Get information about top coins
 
-#### `GET /coins/id`
+#### `GET /coins/:ticker`
 
 Example Query:
 ```
-http://coins-api.herokuapp.com/coins/1299101
+http://coins-api.herokuapp.com/coins/btc
 ```
 
 Response:
@@ -32,22 +32,17 @@ Response:
 
 ### Get Price in Other Currencies
 
-#### `GET /coins/:id/chf`
+#### `GET /coins/:ticker/:currency`
 
 Example Query:
 ```
-http://coins-api.herokuapp.com/coins/1299101/chf
+http://coins-api.herokuapp.com/coins/btc/chf
 ```
 
 Response:
 ```json
 {
-  "coin": "Bitcoin",
-  "ticker": "BTC",
-  "price": "383.95",
-  "24hrvolume": "12268800",
-  "24hrchange": "-0.95",
-  "supply": "13412775"
+  "price": "368.25"
 }
 ```
 
@@ -61,7 +56,6 @@ $ node server.js
 ```sh
 $ npm install
 $ heroku create
-$ heroku addons:add mongolab
 $ (git add, git commit)
 $ git push heroku master
 ```
