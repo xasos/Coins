@@ -1,5 +1,9 @@
 {
 	"name": "coins-api",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/xasos/Coins.git"
+	},
 	"main": "app.js",
 	"dependencies": {
 		"express": "~4.0.0",
