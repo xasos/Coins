@@ -12,7 +12,6 @@ var target = 'http://coinmarketcap.com/';
 
 var port = process.env.PORT || 1337;
 var router = express.Router();
-var coins = {};
 
 router.use(function(req, res, next) {
 	console.log('Request');
@@ -36,8 +35,8 @@ router.route('/coins')
 
 router.route('/test') 
 	.get(function(req, res) {		
-		res.json(scrapeCoins(10));
-		res.json(coinList);
+		scrapeCoins(10);
+		res.json(JSON.stringify(coinList));
 	})
 
 var scrapeCoins = function(numCoins) {
@@ -67,15 +66,14 @@ var scrapeCoins = function(numCoins) {
 				var delta24hr = $(this).find('td').eq(6).text().trim();
 				delta24hr = delta24hr.slice(0, -2);
 
-				coins = {"name": coinName, "position": pos, "price": price, "ticker": ticker, "volume": volume, "delta24hr": delta24hr};
+				var coins = {"name": coinName, "position": pos, "price": price, "ticker": ticker, "volume": volume, "delta24hr": delta24hr, timestamp: Date.now()};
 				if(coinName) {
 					coinList.push(coins);
 				}				
 				console.log(coinList);
 			});					
 		}
-	});
-		// return {"yo": "yo"};	
+	});	
 };
 
 // router.route('/coins/:coin_id') 
