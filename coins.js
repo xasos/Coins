@@ -7,14 +7,12 @@ var request = require('request');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var coins = {name: '', position: '', price: '', ticker: '', volume: '', delta24hr: ''};
 var coinList = [];
-var stuff = {};
 var target = 'http://coinmarketcap.com/';
 
 var port = process.env.PORT || 1337;
 var router = express.Router();
-var coinName, pos, marketCap, price, volume, delta24hr;
+var coins = {};
 
 router.use(function(req, res, next) {
 	console.log('Request');
@@ -39,6 +37,7 @@ router.route('/coins')
 router.route('/test') 
 	.get(function(req, res) {		
 		res.json(scrapeCoins(10));
+		res.json(coinList);
 	})
 
 var scrapeCoins = function(numCoins) {
@@ -48,32 +47,35 @@ var scrapeCoins = function(numCoins) {
 
 			$('tr').each(function(i) {
 				if ($(this).attr("id")) {
-					coinName = JSON.stringify($(this).attr("id"));
+					var coinName = $(this).attr("id").slice(3);
 				}
 
-				pos = $(this).find('td').eq(0).text().trim();
+				var pos = $(this).find('td').eq(0).text().trim();
 
-				marketCap = $(this).find('td').eq(2).text().trim();
+				var marketCap = $(this).find('td').eq(2).text().trim();
 				marketCap = marketCap.slice(2).replace(/,/g, "");
 				
-				price = $(this).find('td').eq(3).text().trim();
-				price = marketCap.slice(2).replace(/,/g, "");
+				var price = $(this).find('td').eq(3).text().trim();
+				price = price.slice(2).replace(/,/g, "");
 
-				//console.log($(this).find('td').eq(4).text().trim());
+				var ticker = $(this).find('td').eq(4).text().trim();
+				ticker = ticker.split('\n').slice(1, 2).join('\n').trim();
 
-				volume = $(this).find('td').eq(5).text().trim();
+				var volume = $(this).find('td').eq(5).text().trim();
 				volume = volume.slice(2).replace(/,/g, "");
 
-				delta24hr = $(this).find('td').eq(6).text().trim();
+				var delta24hr = $(this).find('td').eq(6).text().trim();
 				delta24hr = delta24hr.slice(0, -2);
 
-				coins = {"name": coinName, "position": pos, "price": price, "ticker": "btc", "volume": volume, "delta24hr": delta24hr};
-				coinList.push(coins);
-			});			
-			console.log(coinList);
+				coins = {"name": coinName, "position": pos, "price": price, "ticker": ticker, "volume": volume, "delta24hr": delta24hr};
+				if(coinName) {
+					coinList.push(coins);
+				}				
+				console.log(coinList);
+			});					
 		}
 	});
-		return {"yo": "yo"};	
+		// return {"yo": "yo"};	
 };
 
 // router.route('/coins/:coin_id') 
