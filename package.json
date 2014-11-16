@@ -1,6 +1,6 @@
 {
 	"name": "coins-api",
-	"main": "server.js",
+	"main": "app.js",
 	"dependencies": {
 		"express": "~4.0.0",
 		"mongoose": "~3.6.13",
