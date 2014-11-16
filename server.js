@@ -7,12 +7,14 @@ var request = require('request');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var urls = [];
-var coinList = {name: '', price: '', ticker: '', delta24hr: ''}
+var coins = {name: '', position: '', price: '', ticker: '', volume: '', delta24hr: ''};
+var coinList = [];
+var stuff = {};
 var target = 'http://coinmarketcap.com/';
 
 var port = process.env.PORT || 1337;
 var router = express.Router();
+var coinName, pos, marketCap, price, volume, delta24hr;
 
 router.use(function(req, res, next) {
 	console.log('Request');
@@ -35,25 +37,43 @@ router.route('/coins')
 	});
 
 router.route('/test') 
-	.get(function(req, res) {
-		scrapeCoins(10);
-		res.json({"text": "yo"});
+	.get(function(req, res) {		
+		res.json(scrapeCoins(10));
 	})
 
 var scrapeCoins = function(numCoins) {
 	request(target, function(err, resp, body) {
 		if (!err && resp.statusCode == 200) {
 			var $ = cheerio.load(body);
+
 			$('tr').each(function(i) {
 				if ($(this).attr("id")) {
-					var coinName = JSON.stringify($(this).attr("id"));
-					console.log(coinName.substring(4, coinName.length - 1));
+					coinName = JSON.stringify($(this).attr("id"));
 				}
 
-				console.log($(this).find('td'));				
-			});
+				pos = $(this).find('td').eq(0).text().trim();
+
+				marketCap = $(this).find('td').eq(2).text().trim();
+				marketCap = marketCap.slice(2).replace(/,/g, "");
+				
+				price = $(this).find('td').eq(3).text().trim();
+				price = marketCap.slice(2).replace(/,/g, "");
+
+				//console.log($(this).find('td').eq(4).text().trim());
+
+				volume = $(this).find('td').eq(5).text().trim();
+				volume = volume.slice(2).replace(/,/g, "");
+
+				delta24hr = $(this).find('td').eq(6).text().trim();
+				delta24hr = delta24hr.slice(0, -2);
+
+				coins = {"name": coinName, "position": pos, "price": price, "ticker": "btc", "volume": volume, "delta24hr": delta24hr};
+				coinList.push(coins);
+			});			
+			console.log(coinList);
 		}
 	});
+		return {"yo": "yo"};	
 };
 
 // router.route('/coins/:coin_id') 
