@@ -66,7 +66,7 @@ Response:
 ## Run Locally
 ```sh
 $ npm install
-$ node server.js
+$ node app.js
 ```
 
 ## Deploy to Heroku 
