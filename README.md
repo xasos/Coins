@@ -1,6 +1,8 @@
 # Coins
 
-Cryptocurrency Price API written in Node.js/Express. Data is scraped from [CoinMarketCap](http://coinmarketcap.com/).
+Cryptocurrency Price API written with Node.js/Cheerio. Data is scraped from [CoinMarketCap](http://coinmarketcap.com/).
+
+**NOTICE**: Not complete, under active development.
 
 ## Usage
 **Base URL:** http://coins-api.herokuapp.com
