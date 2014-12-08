@@ -1,6 +1,6 @@
 # Coins
 
-Cryptocurrency Price REST API written with Node.js/Cheerio. Data is scraped from [CoinMarketCap](http://coinmarketcap.com/).
+Cryptocurrency Price REST API written in Node.js. Data is scraped from [CoinMarketCap](http://coinmarketcap.com/).
 
 **NOTICE**: Not complete, under active development.
 
