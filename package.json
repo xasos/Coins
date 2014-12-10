@@ -1,5 +1,5 @@
 {
-	"name": "coins-api",
+	"name": "Coins",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/xasos/Coins.git"
@@ -11,5 +11,8 @@
 		"body-parser": "~1.0.1",
 		"cheerio": "latest",
 		"request": "latest"
-	}
+	},
+	 "engines": {
+		 "node": "0.10.x"
+  	}
 }
