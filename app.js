@@ -4,14 +4,13 @@ var bodyParser = require('body-parser');
 var cheerio = require('cheerio');
 var request = require('request');
 
+var port = process.env.PORT || 1337;
+var router = express.Router();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var coinList = [];
 var target = 'http://coinmarketcap.com/';
-
-var port = process.env.PORT || 1337;
-var router = express.Router();
 
 router.use(function(req, res, next) {
 	console.log('Request');
