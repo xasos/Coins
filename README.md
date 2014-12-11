@@ -9,9 +9,48 @@ Cryptocurrency Price REST API written in Node.js. Data is scraped from [CoinMark
 
 **Output:** JSON
 
-### Get Coin Prices
+### Get All Coin Prices
 
-Get information about coins
+Get information about all coins
+
+#### `GET /coins`
+
+Example Query:
+```
+http://coins-api.herokuapp.com/coins
+```
+
+Response:
+```json
+{
+"name": "bitcoin",
+"position": "1",
+"price": "356.51",
+"marketCap": "4847623128",
+"ticker": "BTC",
+"volume": "29824000",
+"delta24hr": "2.37",
+"timestamp": 1418325595612,
+"currency": "usd"
+},
+{
+"name": "ripple",
+"position": "2",
+"price": "0.016374",
+"marketCap": "505654484",
+"ticker": "XRP",
+"volume": "1620910",
+"delta24hr": "6.48",
+"timestamp": 1418325595612,
+"currency": "usd"
+},
+...
+...
+```
+
+### Get Individual Coin Prices
+
+Get information about individual coins
 
 #### `GET /coins/:ticker`
 
