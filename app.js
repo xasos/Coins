@@ -27,7 +27,8 @@ router.route('/coins')
 		request(target, function(err, resp, body) {
 		if (!err && resp.statusCode == 200) {
 			var $ = cheerio.load(body);
-
+			var currentTime = Date.now();
+	
 			$('tr').each(function(i) {
 				if ($(this).attr("id")) {
 					var coinName = $(this).attr("id").slice(3);
@@ -50,7 +51,7 @@ router.route('/coins')
 				var delta24hr = $(this).find('td').eq(6).text().trim();
 				delta24hr = delta24hr.slice(0, -2);
 
-				var coins = {"name": coinName, "position": pos, "price": price, "marketCap": marketCap, "ticker": ticker, "volume": volume, "delta24hr": delta24hr, "timestamp": Date.now(), "currency": "usd"};
+				var coins = {"name": coinName, "position": pos, "price": price, "marketCap": marketCap, "ticker": ticker, "volume": volume, "delta24hr": delta24hr, "timestamp": currentTime, "currency": "usd"};
 				if(coinName) {
 					coinList.push(coins);
 				}				
