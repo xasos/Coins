@@ -2,6 +2,8 @@
 
 Cryptocurrency Price REST API written in Node.js. Data is scraped from [CoinMarketCap](http://coinmarketcap.com/).
 
+*Note: This is an unofficial API and __not__ supported or controlled by CoinMarketCap itself. Any questions, comments, feedback or feature requests should be directed to [xasos](http://github.com/xasos) or via an [issue](https://github.com/karan/xasos/issues) in this repo.*
+
 **NOTICE**: Not complete, under active development.
 
 ## Usage
@@ -22,30 +24,30 @@ http://coins-api.herokuapp.com/coins
 
 Response:
 ```json
-{
-"name": "bitcoin",
-"position": "1",
-"price": "356.51",
-"marketCap": "4847623128",
-"ticker": "BTC",
-"volume": "29824000",
-"delta24hr": "2.37",
-"timestamp": 1418325595612,
-"currency": "usd"
-},
-{
-"name": "ripple",
-"position": "2",
-"price": "0.016374",
-"marketCap": "505654484",
-"ticker": "XRP",
-"volume": "1620910",
-"delta24hr": "6.48",
-"timestamp": 1418325595612,
-"currency": "usd"
-},
-...
-...
+  {
+    "name": "bitcoin",
+    "position": "1",
+    "price": "356.51",
+    "marketCap": "4847623128",
+    "ticker": "BTC",
+    "volume": "29824000",
+    "delta24hr": "2.37",
+    "timestamp": 1418325595612,
+    "currency": "usd"
+  },
+  {
+    "name": "ripple",
+    "position": "2",
+    "price": "0.016374",
+    "marketCap": "505654484",
+    "ticker": "XRP",
+    "volume": "1620910",
+    "delta24hr": "6.48",
+    "timestamp": 1418325595612,
+    "currency": "usd"
+  },
+  ...
+  ...
 ```
 
 ### Get Individual Coin Prices
