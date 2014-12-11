@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
 	res.json({ message: 'Welcome to coins-api! Documentation for querying the API is available here: https://github.com/xasos/Coins.' });
 });
 
-router.route('/coins/:id') 
+router.route('/coins/:id?') 
 	.get(function(req, res) {		
 		request(target, function(err, resp, body) {
 		if (!err && resp.statusCode == 200) {
