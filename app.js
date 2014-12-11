@@ -21,6 +21,11 @@ router.get('/', function(req, res) {
 	res.json({ message: 'Welcome to coins-api! Documentation for querying the API is available here: https://github.com/xasos/Coins.' });
 });
 
+router.get('/coins/:id', function (req, res, next) {
+  console.log('asdasd');
+  next();
+});
+
 router.route('/coins') 
 	.get(function(req, res) {		
 		request(target, function(err, resp, body) {
