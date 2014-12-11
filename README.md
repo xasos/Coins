@@ -96,7 +96,7 @@ Response:
 
 Example Query:
 ```
-http://coins-api.herokuapp.com/coins/btc/chf
+http://coins-api.herokuapp.com/coins/btc/price/chf
 ```
 
 Response:
