@@ -58,12 +58,12 @@ router.route('/coins/:id?')
                         "name": coinName,
                         "position": pos,
                         "price": price,
+                        "currency": "usd",
                         "marketCap": marketCap,
                         "ticker": ticker,
                         "volume": volume,
                         "delta24hr": delta24hr,
-                        "timestamp": currentTime,
-                        "currency": "usd"
+                        "timestamp": currentTime
                     };
                     if (coinName) {
                         coinList.push(coins);
