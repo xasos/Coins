@@ -25,8 +25,11 @@ router.get('/', function(req, res) {
     });
 });
 
-router.route('/coins/:id?')
-    .get(function(req, res) {
+router.get('/coins/:ticker?/:property?', function(req, res) {
+        var ticker = req.params.ticker;
+        var type = req.params.type;
+        var property = req.params.property;
+        
         request(target, function(err, resp, body) {
             if (!err && resp.statusCode == 200) {
                 var $ = cheerio.load(body);
@@ -74,6 +77,32 @@ router.route('/coins/:id?')
         });
         res.json(coinList);
     });
+    
+router.get('/coins/:ticker?/price/:currency', function(req, res) { 
+        var ticker = req.params.ticker;
+        var type = req.params.currency;
+        
+        var options = {
+            host : 'http://www.freecurrencyconverterapi.com',
+            path : 'http://www.freecurrencyconverterapi.com/api/v2/convert?q=USD_PHP&compact=y',
+            port : 80,
+            method : 'GET'
+          }
+
+      var request = http.request(options, function(response){
+        var body = ""
+        response.on('data', function(data) {
+          body += data;
+        });
+        response.on('end', function() {
+          res.send(JSON.parse(body));
+        });
+      });
+      request.on('error', function(e) {
+        console.log('Problem with request: ' + e.message);
+      });
+      request.end();
+}
 
 app.use('/', router);
 app.listen(port);
