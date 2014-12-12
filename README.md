@@ -121,7 +121,7 @@ $ git push heroku master
 ```
 
 ## Credits
-All the data was scraped from [CoinMarketCap](http://coinmarketcap.com/). Additionally, these API documents are modeled off the wonderful API documentation for [Hook](https://github.com/karan/Hook) by @karan.
+All the data was scraped from [CoinMarketCap](http://coinmarketcap.com/). The currency converter uses the [The Free Currency Converter API](http://www.freecurrencyconverterapi.com/). Additionally, these API documents are modeled off the wonderful API documentation for [Hook](https://github.com/karan/Hook) by @karan.
 
 ## License
 [MIT License](LICENSE)
