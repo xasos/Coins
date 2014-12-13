@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cheerio = require('cheerio');
 var request = require('request');
-var http = require('http');
 var port = process.env.PORT || 1337;
 var router = express.Router();
 var app = express();
