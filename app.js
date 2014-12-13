@@ -16,7 +16,6 @@ var coinList = [];
 var target = 'http://coinmarketcap.com/';
 
 router.use(function(req, res, next) {
-    console.log('Request');
     next();
 });
 
@@ -68,16 +67,17 @@ router.route('/coins/:ticker?/:property?')
                     delta24hr = delta24hr.slice(0, -2);
 
                     var coins = {
-                        "name": coinName,
-                        "position": pos,
-                        "price": price,
-                        "currency": "usd",
-                        "marketCap": marketCap,
-                        "ticker": ticker,
-                        "volume": volume,
-                        "delta24hr": delta24hr,
-                        "timestamp": currentTime
+                        name: coinName,
+                        position: pos,
+                        price: price,
+                        currency: "usd",
+                        marketCap: marketCap,
+                        ticker: ticker,
+                        volume: volume,
+                        delta24hr: delta24hr,
+                        timestamp: currentTime
                     };
+
                     if (coinName) {
                         coinList.push(coins);
                     }
@@ -91,34 +91,37 @@ router.route('/coins/:ticker?/:property?')
 router.route('/coins/:ticker?/price/:currency')
     .get(function(req, res) {
         var ticker = req.params.ticker;
-        var type = req.params.currency;
+        var currency = req.params.currency;
+        var requestURL = 'http://freecurrencyconverterapi.com/api/v2/convert?q=USD_'  
 
-        console.log(ticker)
-        console.log(type)
-
-        var options = {
-            host: 'http://www.freecurrencyconverterapi.com',
-            path: '/api/v2/convert?q=USD_PHP&compact=y',
-            port: 1180,
-            method: 'GET'
+        if (ticker && currency) {
+            requestURL += currency + '&compact=y'
+            request(requestURL, function (error, response, body) {
+                if (!error && response.statusCode == 200 && !isEmpty(body)) {
+                    res.send(body);
+                }
+            });
         }
+        else {
+            res.status(500);
+            res.render('error', { error: err });
+        }    
+    });
 
-        var request = http.request(options, function(response) {
-            var body = ""
-            response.on('data', function(data) {
-                body += data;
-            });
-            response.on('end', function() {
-                res.send(JSON.parse(body));
-            });
-        });
+function isEmpty( obj ) { 
+    for ( var prop in obj ) { 
+        return false; 
+    } 
+    return true; 
+}
 
-        request.on('error', function(e) {
-            console.log('Problem with request: ' + e.message);
-        });
+function getCoinData() {
 
-        request.end();
-});
+}
+
+function convertCurrency() {
+
+}
 
 app.use('/', router);
 app.listen(port);
