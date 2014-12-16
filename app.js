@@ -120,7 +120,16 @@ function getCoinData() {
 }
 
 function convertCurrency() {
+    var requestURL = 'http://freecurrencyconverterapi.com/api/v2/convert?q=USD_'  
 
+    if (ticker && currency) {
+        requestURL += currency + '&compact=y'
+        request(requestURL, function (error, response, body) {
+            if (!error && response.statusCode == 200 && !isEmpty(body)) {
+                res.send(body);
+            }
+        });
+    }
 }
 
 app.use('/', router);
