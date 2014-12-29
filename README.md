@@ -13,7 +13,7 @@ Cryptocurrency Price REST API written in Node.js. Data is scraped from [CoinMark
 
 ### Get All Coin Prices
 
-Get information about all coins
+Get price information about all coins.
 
 #### `GET /coins`
 
