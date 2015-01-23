@@ -102,7 +102,8 @@ http://coins-api.herokuapp.com/coins/btc/price/chf
 Response:
 ```json
 {
-  "price": "368.25"
+  "price": "368.25",
+  "currency": "chf"
 }
 ```
 
