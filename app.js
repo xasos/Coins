@@ -87,7 +87,7 @@ router.route('/coins/:ticker?/:property?')
         res.json(coinList);
     });
     
-router.route('/coins/:ticker?/price/:currency')
+router.route('/coins/:ticker/price/:currency')
     .get(function(req, res) {
 
         var ticker = req.params.ticker;
@@ -97,55 +97,19 @@ router.route('/coins/:ticker?/price/:currency')
         request(target, function(err, resp, body) {
             if (!err && resp.statusCode == 200) {
                 var $ = cheerio.load(body);
-                var currentTime = Date.now();
 
                 $('tr').each(function(i) {
-                    if ($(this).attr("id")) {
-                        var coinName = $(this).attr("id").slice(3);
-                    }
-
-                    var pos = $(this).find('td').eq(0).text().trim();
-
-                    var marketCap = $(this).find('td').eq(2).text().trim();
-                    marketCap = marketCap.slice(2).replace(/,/g, "");
-
                     var price = $(this).find('td').eq(3).text().trim();
                     price = price.slice(2).replace(/,/g, "");
 
-                    var ticker = $(this).find('td').eq(4).text().trim();
-                    ticker = ticker.split('\n').slice(1, 2).join('\n').trim();
-
-                    var volume = $(this).find('td').eq(5).text().trim();
-                    volume = volume.slice(2).replace(/,/g, "");
-
-                    var delta24hr = $(this).find('td').eq(6).text().trim();
-                    delta24hr = delta24hr.slice(0, -2);
-
                     var coins = {
-                        name: coinName,
-                        position: pos,
                         price: price,
-                        currency: "usd",
-                        marketCap: marketCap,
-                        ticker: ticker,
-                        volume: volume,
-                        delta24hr: delta24hr,
-                        timestamp: currentTime
+                        currency: "usd"
                     };
 
-                    if (coinName) {
-                        coinList.push(coins);
-                    }
+                    coinList.push(coins);
                     console.log(coinList);
                 });
-            }
-        });
-
-        var coinInfo = [];  
-
-        coinList.forEach(function(entry) {
-            if(entry.ticker == ticker) {
-                coinInfo = entry;
             }
         });
 
@@ -156,7 +120,6 @@ router.route('/coins/:ticker?/price/:currency')
 
             request(requestURL, function (error, response, body) {
                 if (!error && response.statusCode == 200 && !isEmpty(body)) {
-                    // res.send(body);
                     var newPrice = coinInfo.price * body.currencyString.val; //this wont work (currencystring)
                     res.send({price: newPrice});
                 }
@@ -166,31 +129,6 @@ router.route('/coins/:ticker?/price/:currency')
             res.render('error', { error: err });
         }    
     });
-
-
-function isEmpty(obj) { 
-    for (var prop in obj) { 
-        return false; 
-    } 
-    return true; 
-}
-
-// function getCoinData() {
-
-// }
-
-// function convertCurrency() {
-//     var requestURL = 'http://freecurrencyconverterapi.com/api/v2/convert?q=USD_'  
-
-//     if (ticker && currency) {
-//         requestURL += currency + '&compact=y'
-//         request(requestURL, function (error, response, body) {
-//             if (!error && response.statusCode == 200 && !isEmpty(body)) {
-//                 res.send(body);
-//             }
-//         });
-//     }
-// }
 
 app.use('/', router);
 app.listen(port);
