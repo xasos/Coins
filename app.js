@@ -7,7 +7,7 @@ var router = express.Router();
 var app = express();
 
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
 app.use(bodyParser.json());
 
@@ -15,120 +15,120 @@ var coinList = [];
 var target = 'http://coinmarketcap.com/';
 
 router.use(function(req, res, next) {
-    next();
+  next();
 });
 
 router.get('/', function(req, res) {
-    res.json({
-        message: 'Welcome to coins-api! Documentation for querying the API is available here: https://github.com/xasos/Coins.'
-    });
+  res.json({
+    message: 'Welcome to coins-api! Documentation for querying the API is available here: https://github.com/xasos/Coins.'
+  });
 });
 
 router.route('/coins/:ticker?/:property?')
-    .get(function(req, res) {
-        var ticker = req.params.ticker;
-        var property = req.params.property;
-        
-        if (ticker) {
-            if (property) {
+  .get(function(req, res) {
+    var ticker = req.params.ticker;
+    var property = req.params.property;
 
-            }
-            else {
+    if (ticker) {
+      if (property) {
 
-            }
-        }        
+      } else {
 
-        request(target, function(err, resp, body) {
-            if (!err && resp.statusCode == 200) {
-                var $ = cheerio.load(body);
-                var currentTime = Date.now();
+      }
+    }
 
-                $('tr').each(function(i) {
-                    if ($(this).attr("id")) {
-                        var coinName = $(this).attr("id").slice(3);
-                    }
+    request(target, function(err, resp, body) {
+      if (!err && resp.statusCode == 200) {
+        var $ = cheerio.load(body);
+        var currentTime = Date.now();
 
-                    var pos = $(this).find('td').eq(0).text().trim();
+        $('tr').each(function(i) {
+          if ($(this).attr("id")) {
+            var coinName = $(this).attr("id").slice(3);
+          }
 
-                    var marketCap = $(this).find('td').eq(2).text().trim();
-                    marketCap = marketCap.slice(2).replace(/,/g, "");
+          var pos = $(this).find('td').eq(0).text().trim();
 
-                    var price = $(this).find('td').eq(3).text().trim();
-                    price = price.slice(2).replace(/,/g, "");
+          var marketCap = $(this).find('td').eq(2).text().trim();
+          marketCap = marketCap.slice(2).replace(/,/g, "");
 
-                    var ticker = $(this).find('td').eq(4).text().trim();
-                    ticker = ticker.split('\n').slice(1, 2).join('\n').trim();
+          var price = $(this).find('td').eq(3).text().trim();
+          price = price.slice(2).replace(/,/g, "");
 
-                    var volume = $(this).find('td').eq(5).text().trim();
-                    volume = volume.slice(2).replace(/,/g, "");
+          var ticker = $(this).find('td').eq(4).text().trim();
+          ticker = ticker.split('\n').slice(1, 2).join('\n').trim();
 
-                    var delta24hr = $(this).find('td').eq(6).text().trim();
-                    delta24hr = delta24hr.slice(0, -2);
+          var volume = $(this).find('td').eq(5).text().trim();
+          volume = volume.slice(2).replace(/,/g, "");
 
-                    var coins = {
-                        name: coinName,
-                        position: pos,
-                        price: price,
-                        currency: "usd",
-                        marketCap: marketCap,
-                        ticker: ticker,
-                        volume: volume,
-                        delta24hr: delta24hr,
-                        timestamp: currentTime
-                    };
+          var delta24hr = $(this).find('td').eq(6).text().trim();
+          delta24hr = delta24hr.slice(0, -2);
 
-                    if (coinName) {
-                        coinList.push(coins);
-                    }
-                    console.log(coinList);
-                });
-            }
+          var coins = {
+            name: coinName,
+            position: pos,
+            price: price,
+            currency: "usd",
+            marketCap: marketCap,
+            ticker: ticker,
+            volume: volume,
+            delta24hr: delta24hr,
+            timestamp: currentTime
+          };
+
+          if (coinName) {
+            coinList.push(coins);
+          }
+          console.log(coinList);
         });
-        res.json(coinList);
+      }
     });
-    
-router.route('/coins/:ticker/price/:currency')
-    .get(function(req, res) {
+    res.json(coinList);
+  });
 
-        var ticker = req.params.ticker;
-        var currency = req.params.currency;
+router.route('/coins/:ticker?/price/:currency?')
+  .get(function(req, res) {
+    var ticker = req.params.ticker;
+    var currency = req.params.currency;
+    var price;
 
-        // Request data
-        request(target, function(err, resp, body) {
-            if (!err && resp.statusCode == 200) {
-                var $ = cheerio.load(body);
+    request(target, function(err, resp, body) {
+      if (!err && resp.statusCode == 200) {
+        var $ = cheerio.load(body);
 
-                $('tr').each(function(i) {
-                    var price = $(this).find('td').eq(3).text().trim();
-                    price = price.slice(2).replace(/,/g, "");
-
-                    var coins = {
-                        price: price,
-                        currency: "usd"
-                    };
-
-                    coinList.push(coins);
-                    console.log(coinList);
-                });
-            }
+        $('tr').each(function(i) { //do until ticker is found
+          price = $(this).find('td').eq(3).text().trim();
+          price = price.slice(2).replace(/,/g, "");
         });
 
-        var requestURL = 'http://freecurrencyconverterapi.com/api/v2/convert?q=USD_';
-        if (ticker && currency) {
-            requestURL += currency + '&compact=y';
-            var currencyString = "USD_" + currency;
+        var requestURL = 'http://freecurrencyconverterapi.com/api/v2/convert?q=USD_' + currency + '&compact=y';
 
-            request(requestURL, function (error, response, body) {
-                if (!error && response.statusCode == 200 && !isEmpty(body)) {
-                    var newPrice = coinInfo.price * body.currencyString.val; //this wont work (currencystring)
-                    res.send({price: newPrice});
-                }
+        request(requestURL, function(error, response, body) {
+          if (!error && response.statusCode == 200) {
+            console.log("body: " + body);
+            var newPrice = coinInfo.price * body.currencyString.val;
+            res.send({
+              price: newPrice
             });
-        } else {
-            res.status(500);
-            res.render('error', { error: err });
-        }    
+          }
+        });
+
+        var coins = {
+          price: price,
+          currency: currency
+        };
+
+        coinList.push(coins);
+        console.log(coinList);
+      }
     });
+
+
+    //else {
+    //res.status(500);
+    //res.render('error', { error: err });
+    //}    
+  });
 
 app.use('/', router);
 app.listen(port);
