@@ -1,5 +1,7 @@
 # Coins
 
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
+
 Cryptocurrency Price REST API written in Node.js. Data is scraped from [CoinMarketCap](http://coinmarketcap.com/).
 
 *Note: This is an unofficial API and __not__ supported or controlled by CoinMarketCap itself. Any questions, comments, feedback or feature requests should be directed to [xasos](http://github.com/xasos) or via an [issue](https://github.com/xasos/Coins/issues) in this repo.*
@@ -126,3 +128,9 @@ All the data was scraped from [CoinMarketCap](http://coinmarketcap.com/). The cu
 
 ## License
 [MIT License](LICENSE)
+
+
+[travis-url]: https://travis-ci.org/xasos/coins
+[travis-image]: https://travis-ci.org/xasos/coins.svg?branch=master
+[daviddm-url]: https://david-dm.org/xasos/coins.svg?theme=shields.io
+[daviddm-image]: https://david-dm.org/xasos/coins
