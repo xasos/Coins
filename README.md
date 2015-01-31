@@ -130,7 +130,7 @@ All the data was scraped from [CoinMarketCap](http://coinmarketcap.com/). The cu
 [MIT License](LICENSE)
 
 
-[travis-url]: https://travis-ci.org/xasos/coins
-[travis-image]: https://travis-ci.org/xasos/coins.svg?branch=master
-[daviddm-url]: https://david-dm.org/xasos/coins.svg?theme=shields.io
-[daviddm-image]: https://david-dm.org/xasos/coins
+[travis-url]: https://travis-ci.org/xasos/Coins
+[travis-image]: https://travis-ci.org/xasos/Coins.svg?branch=master
+[daviddm-url]: https://david-dm.org/xasos/Coins.svg?theme=shields.io
+[daviddm-image]: https://david-dm.org/xasos/Coins
