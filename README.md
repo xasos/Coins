@@ -1,6 +1,6 @@
 # Coins
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
+[![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
 Cryptocurrency Price REST API written in Node.js. Data is scraped from [CoinMarketCap](http://coinmarketcap.com/).
 
