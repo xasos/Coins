@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var cheerio = require('cheerio');
@@ -24,18 +26,9 @@ router.get('/', function(req, res) {
   });
 });
 
-router.route('/coins/:ticker?/:property?')
+router.route('/coins/:ticker?')
   .get(function(req, res) {
-    var ticker = req.params.ticker;
-    var property = req.params.property;
-
-    if (ticker) {
-      if (property) {
-
-      } else {
-
-      }
-    }
+    var coinTicker = req.params.ticker;
 
     request(target, function(err, resp, body) {
       if (!err && resp.statusCode == 200) {
@@ -75,15 +68,22 @@ router.route('/coins/:ticker?/:property?')
             delta24hr: delta24hr,
             timestamp: currentTime
           };
-
-          if (coinName) {
+          
+          if (coinTicker) { // Check if user supplied a spedific ticker in URL
+            if (coins.name === coinTicker) {
+              var individualCoin = key;
+              coinList.push(key);
+            }
+          }
+          else if (coinName) { // Else check if coinName is valid
             coinList.push(coins);
           }
-          console.log(coinList);
+
         });
       }
     });
     res.json(coinList);
+
   });
 
 router.route('/coins/:ticker?/price/:currency?')
@@ -123,11 +123,6 @@ router.route('/coins/:ticker?/price/:currency?')
       }
     });
 
-
-    //else {
-    //res.status(500);
-    //res.render('error', { error: err });
-    //}    
   });
 
 app.use('/', router);
