@@ -74,24 +74,6 @@ Response:
   "supply": "13412775"
 }
 ```
-### Isolated Properties
-
-Simply append any property to the URL after the ticker
-
-#### `GET /coins/:ticker/:property`
-
-Example Query:
-```
-http://coins-api.herokuapp.com/coins/btc/supply
-```
-
-Response:
-```json
-{
-  "supply": "13412775"
-}
-```
-
 ### Get Price in Other Currencies
 
 #### `GET /coins/:ticker/price/:currency`
