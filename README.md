@@ -52,7 +52,7 @@ Response:
 
 ### Get Individual Coin Prices
 
-Get information about individual coins
+Get information about individual coins.
 
 #### `GET /coins/:ticker`
 
@@ -72,24 +72,6 @@ Response:
   "supply": "13412775"
 }
 ```
-### Isolated Properties
-
-Simply append any property to the URL after the ticker
-
-#### `GET /coins/:ticker/:property`
-
-Example Query:
-```
-http://coins-api.herokuapp.com/coins/btc/supply
-```
-
-Response:
-```json
-{
-  "supply": "13412775"
-}
-```
-
 ### Get Price in Other Currencies
 
 #### `GET /coins/:ticker/price/:currency`
@@ -122,7 +104,7 @@ $ git push heroku master
 ```
 
 ## Credits
-All the data was scraped from [CoinMarketCap](http://coinmarketcap.com/). The currency converter uses the [The Free Currency Converter API](http://www.freecurrencyconverterapi.com/). Additionally, these API documents are modeled off the wonderful API documentation for [Hook](https://github.com/karan/Hook) by @karan.
+All the data was scraped from [CoinMarketCap](http://coinmarketcap.com/). The currency converter uses the [The Free Currency Converter API](http://www.freecurrencyconverterapi.com/). Additionally, this API documentation is modeled off the wonderful API documentation for [Hook](https://github.com/karan/Hook) by @karan.
 
 ## License
 [MIT License](LICENSE)
