@@ -6,8 +6,6 @@ Cryptocurrency Price REST API written in Node.js. Data is scraped from [CoinMark
 
 *Note: This is an unofficial API and __not__ supported or controlled by CoinMarketCap itself. Any questions, comments, feedback or feature requests should be directed to [xasos](http://github.com/xasos) or via an [issue](https://github.com/xasos/Coins/issues) in this repo.*
 
-**NOTICE**: Not complete, under active development.
-
 ## Usage
 **Base URL:** http://coins-api.herokuapp.com
 
