@@ -6,10 +6,10 @@
   },
   "main": "app.js",
   "dependencies": {
-    "body-parser": "^1.0.2",
-    "cheerio": "latest",
-    "express": "^4.0.0",
-    "request": "^2.51.0"
+    "body-parser": "^1.12.2",
+    "cheerio": "^0.19.0",
+    "express": "^4.12.3",
+    "request": "^2.53.0"
   },
   "engines": {
     "node": "0.10.x"
