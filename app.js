@@ -86,40 +86,55 @@ router.route('/coins/:ticker?')
 
   });
 
-router.route('/coins/:ticker?/price/:currency?')
+router.route('/coins/:ticker?/price/:currency')
   .get(function(req, res) {
     var ticker = req.params.ticker;
     var currency = req.params.currency;
-    var price;
+    var coins;
+
+    var requestURL = 'http://freecurrencyconverterapi.com/api/v3/convert?q=USD_' + currency + '&compact=ultra';
 
     request(target, function(err, resp, body) {
       if (!err && resp.statusCode == 200) {
-        var $ = cheerio.load(body);
+        var $ = cheerio.load(body);        
 
-        $('tr').each(function(i) { //do until ticker is found
+        $('tr').each(function(i) { 
+          if ($(this).attr("id")) {
+            coinName = $(this).attr("id").slice(3);
+          }
+
           price = $(this).find('td').eq(3).text().trim();
-          price = price.slice(2).replace(/,/g, "");
+          price = price.slice(2).replace(/,/g, "");          
+
+          if (coinName == ticker) {
+            coins = {
+              name: coinName,              
+              price: price
+            }
+          };
+
         });
-
-        var requestURL = 'http://freecurrencyconverterapi.com/api/v2/convert?q=USD_' + currency + '&compact=y';
-
+             
         request(requestURL, function(error, response, body) {
           if (!error && response.statusCode == 200) {
-            console.log("body: " + body);
-            var newPrice = coinInfo.price * body.currencyString.val;
+            // Get first property from returned data
+            var firstProp;
+            for (var key in body) {
+              if (body.hasOwnProperty(key)) {
+                firstProp = body[key];
+                break;
+              }
+            };
+
+            // Get new price and return
+            var newPrice = coins.price * body.firstProp;
             res.send({
               price: newPrice
             });
+
           }
         });
 
-        var coins = {
-          price: price,
-          currency: currency
-        };
-
-        coinList.push(coins);
-        console.log(coinList);
       }
     });
 
