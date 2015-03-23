@@ -63,14 +63,17 @@ http://coins-api.herokuapp.com/coins/btc
 
 Response:
 ```json
-{
-  "coin": "Bitcoin",
-  "ticker": "BTC",
-  "price": "383.95",
-  "24hrvolume": "12268800",
-  "24hrchange": "-0.95",
-  "supply": "13412775"
-}
+  {
+    "name": "bitcoin",
+    "position": "1",
+    "price": "356.51",
+    "marketCap": "4847623128",
+    "ticker": "BTC",
+    "volume": "29824000",
+    "delta24hr": "2.37",
+    "timestamp": 1418325595612,
+    "currency": "usd"
+  }
 ```
 ### Get Price in Other Currencies
 
