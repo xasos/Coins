@@ -69,7 +69,7 @@ router.route('/coins/:ticker?')
             timestamp: currentTime
           };
           
-          if (coinTicker) { // Check if user supplied a spedific ticker in URL
+          if (coinTicker) { // Check if user supplied a specified ticker in URL
             if (coins.name === coinTicker) {
               var individualCoin = key;
               coinList.push(key);
@@ -131,13 +131,11 @@ router.route('/coins/:ticker?/price/:currency')
             res.send({
               price: newPrice
             });
-
           }
         });
 
       }
     });
-
   });
 
 app.use('/', router);
